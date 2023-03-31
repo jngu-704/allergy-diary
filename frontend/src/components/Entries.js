@@ -59,6 +59,12 @@ const entriesData = [
 
 export default function Entries() {
   const [entries, setEntries] = useState(entriesData);
+  const [product, setProduct] = useState({
+    id: uuidv4(),
+    time: "",
+    name: "",
+    ingredients: "",
+  });
 
   // useEffect(() => {}, [entries]);
 
@@ -66,7 +72,23 @@ export default function Entries() {
     setEntries([entry, ...entries]);
   };
 
-  const deleteEntry = (entryid, productid) => {
+  const addProduct = (entryid) => {
+    const newEntries = [...entries];
+    const entryIndex = newEntries.findIndex((entry) => entry.id === entryid);
+    newEntries[entryIndex].products = [
+      ...newEntries[entryIndex].products,
+      product,
+    ];
+    setEntries(newEntries);
+    setProduct({
+      id: uuidv4(),
+      time: "",
+      name: "",
+      ingredients: "",
+    });
+  };
+
+  const deleteProduct = (entryid, productid) => {
     const newEntries = [...entries];
     const entryIndex = newEntries.findIndex((entry) => entry.id === entryid);
     const newProducts = newEntries[entryIndex].products.filter(
@@ -107,7 +129,7 @@ export default function Entries() {
                     <th>
                       <Button
                         variant="danger"
-                        onClick={() => deleteEntry(entry.id, product.id)}
+                        onClick={() => deleteProduct(entry.id, product.id)}
                       >
                         Remove
                       </Button>
@@ -116,16 +138,42 @@ export default function Entries() {
                 ))}
                 <tr>
                   <th>
-                    <input type="text" name="time" />
+                    <input
+                      type="text"
+                      value={product.time}
+                      name="time"
+                      onChange={(e) =>
+                        setProduct({ ...product, time: e.target.value })
+                      }
+                    />
                   </th>
                   <th>
-                    <input type="text" name="name" />
+                    <input
+                      type="text"
+                      value={product.name}
+                      name="name"
+                      onChange={(e) =>
+                        setProduct({ ...product, name: e.target.value })
+                      }
+                    />
                   </th>
                   <th>
-                    <input type="text" name="ingredients" />
+                    <input
+                      type="text"
+                      value={product.ingredients}
+                      name="ingredients"
+                      onChange={(e) =>
+                        setProduct({ ...product, ingredients: e.target.value })
+                      }
+                    />
                   </th>
                   <th>
-                    <Button variant="primary">Add</Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => addProduct(entry.id)}
+                    >
+                      Add
+                    </Button>
                   </th>
                 </tr>
               </tbody>

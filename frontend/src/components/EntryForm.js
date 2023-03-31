@@ -17,6 +17,13 @@ export default function EntryForm({ addEntry }) {
   const handleAddEntry = (e) => {
     e.preventDefault();
     addEntry(entry);
+    setEntry({
+      id: uuidv4(),
+      date: "",
+      temperature: "",
+      humidity: "",
+      products: [],
+    });
   };
 
   return (
