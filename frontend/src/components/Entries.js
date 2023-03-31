@@ -52,10 +52,9 @@ export default function Entries() {
     console.log(entries);
   };
 
-  // const deleteEntry = (id) => {
-  //   const newEntries = [...entries];
-  //   setEntries(newEntries.filter((entry) => entry.id !== id));
-  // };
+  const deleteEntry = (id) => {
+    setEntries(entries.filter((entry) => entry.id !== id));
+  };
 
   return (
     <>
@@ -79,7 +78,7 @@ export default function Entries() {
                 <th>{entry.name}</th>
                 <th>{entry.ingredients}</th>
                 <th>
-                  <CloseButton />
+                  <CloseButton onClick={() => deleteEntry(entry.id)} />
                 </th>
               </tr>
             ))}
