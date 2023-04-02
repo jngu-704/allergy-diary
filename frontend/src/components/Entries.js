@@ -6,16 +6,20 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import Form from "react-bootstrap/Form";
 
 import { v4 as uuidv4 } from "uuid";
 import EntryForm from "./EntryForm";
 
+const LOCAL_STORAGE_KEY = "allergyDiary.entries";
 const entriesData = [
   {
     id: uuidv4(),
     date: "31-03-2023",
     temperature: 30,
     humidity: 40,
+    allergicReaction: false,
+    symptoms: "",
     products: [
       {
         id: uuidv4(),
@@ -38,6 +42,8 @@ const entriesData = [
     date: "30-03-2023",
     temperature: 23,
     humidity: 50,
+    allergicReaction: false,
+    symptoms: "",
     products: [
       {
         id: uuidv4(),
@@ -65,6 +71,15 @@ export default function Entries() {
     name: "",
     ingredients: "",
   });
+
+  useEffect(() => {
+    const storedEntries = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedEntries) setEntries(storedEntries);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(entries));
+  }, [entries]);
 
   // useEffect(() => {}, [entries]);
 
@@ -105,10 +120,15 @@ export default function Entries() {
       {entries.map((entry) => (
         <div key={entry.id}>
           <Card>
-            <Card.Header>Date: {entry.date}</Card.Header>
+            <Card.Header>
+              Date: {entry.date}{" "}
+              <Form.Check type="checkbox" label="Allergic Reaction" />
+            </Card.Header>
+
             <ListGroup variant="flush">
               <ListGroup.Item>Temperature: {entry.temperature}</ListGroup.Item>
               <ListGroup.Item>Humidity: {entry.humidity}</ListGroup.Item>
+              <ListGroup.Item>Symptoms: </ListGroup.Item>
             </ListGroup>
 
             <Table striped bordered hover>

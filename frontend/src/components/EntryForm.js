@@ -11,6 +11,7 @@ export default function EntryForm({ addEntry }) {
     date: "",
     temperature: "",
     humidity: "",
+    symptoms: "",
     products: [],
   });
 
@@ -22,15 +23,16 @@ export default function EntryForm({ addEntry }) {
       date: "",
       temperature: "",
       humidity: "",
+      symptoms: "",
       products: [],
     });
   };
 
   return (
     <Card>
+      <Card.Header>New Entry</Card.Header>
       <Form className="m-3">
-        <Card.Title>New Entry</Card.Title>
-        <Form.Group className="mt-3 mb-3" controlId="formBasicDate">
+        <Form.Group className="mb-3" controlId="formBasicDate">
           <Form.Label>Date</Form.Label>
           <Form.Control
             type="text"
