@@ -12,59 +12,45 @@ import { v4 as uuidv4 } from "uuid";
 import EntryForm from "./EntryForm";
 
 const LOCAL_STORAGE_KEY = "allergyDiary.entries";
-const entriesData = [
-  {
-    id: uuidv4(),
-    date: "31-03-2023",
-    temperature: 30,
-    humidity: 40,
-    allergicReaction: false,
-    symptoms: "",
-    products: [
-      {
-        id: uuidv4(),
-        time: "6:30PM",
-        name: "Burger",
-        ingredients:
-          "Bun, Beef Patty, American Cheese, Ketchup, Pickle Slices, Onions, Mustard",
-      },
-      {
-        id: uuidv4(),
-        time: "12:30PM",
-        name: "Coca-cola",
-        ingredients:
-          "Carbonated Water, Sugar, Colour (Caramel 150d), Food Acid (338), Flavour, Caffeine",
-      },
-    ],
-  },
-  {
-    id: uuidv4(),
-    date: "30-03-2023",
-    temperature: 23,
-    humidity: 50,
-    allergicReaction: false,
-    symptoms: "",
-    products: [
-      {
-        id: uuidv4(),
-        time: "6:30PM",
-        name: "Burger",
-        ingredients:
-          "Bun, Beef Patty, American Cheese, Ketchup, Pickle Slices, Onions, Mustard",
-      },
-      {
-        id: uuidv4(),
-        time: "12:30PM",
-        name: "Coca-cola",
-        ingredients:
-          "Carbonated Water, Sugar, Colour (Caramel 150d), Food Acid (338), Flavour, Caffeine",
-      },
-    ],
-  },
-];
+// const entriesData = [
+//   {
+//     id: uuidv4(),
+//     date: "31-03-2023",
+//     temperature: 30,
+//     humidity: 40,
+//     allergicReaction: false,
+//     symptoms: "",
+//     products: [
+//       {
+//         id: uuidv4(),
+//         time: "6:30PM",
+//         name: "Burger",
+//         ingredients:
+//           "Bun, Beef Patty, American Cheese, Ketchup, Pickle Slices, Onions, Mustard",
+//       },
+//       {
+//         id: uuidv4(),
+//         time: "12:30PM",
+//         name: "Coca-cola",
+//         ingredients:
+//           "Carbonated Water, Sugar, Colour (Caramel 150d), Food Acid (338), Flavour, Caffeine",
+//       },
+//     ],
+//   },
+// ];
 
 export default function Entries() {
-  const [entries, setEntries] = useState(entriesData);
+  const [entries, setEntries] = useState([
+    {
+      id: uuidv4(),
+      date: "30-03-2023",
+      temperature: 23,
+      humidity: 50,
+      allergicReaction: false,
+      symptoms: "",
+      products: [],
+    },
+  ]);
   const [product, setProduct] = useState({
     id: uuidv4(),
     time: "",
@@ -80,8 +66,6 @@ export default function Entries() {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(entries));
   }, [entries]);
-
-  // useEffect(() => {}, [entries]);
 
   const addEntry = (entry) => {
     setEntries([entry, ...entries]);
