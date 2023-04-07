@@ -1,15 +1,13 @@
 import "./App.css";
-import Container from "react-bootstrap/esm/Container";
-
 import Header from "./components/Header";
-import Entries from "./components/Entries";
+import Main from "./components/Main";
 
 function App() {
   return (
     <>
       <Header />
       <br />
-      <Entries />
+      <Main />
     </>
   );
 }

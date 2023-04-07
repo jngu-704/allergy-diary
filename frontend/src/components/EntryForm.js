@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -11,6 +12,7 @@ export default function EntryForm({ addEntry }) {
     date: "",
     temperature: "",
     humidity: "",
+    allergicReaction: false,
     symptoms: "",
     products: [],
   });
@@ -23,6 +25,7 @@ export default function EntryForm({ addEntry }) {
       date: "",
       temperature: "",
       humidity: "",
+      allergicReaction: false,
       symptoms: "",
       products: [],
     });
@@ -30,19 +33,22 @@ export default function EntryForm({ addEntry }) {
 
   return (
     <Card>
-      <Card.Header>New Entry</Card.Header>
-      <Form className="m-3">
+      <Card.Header>Create New Entry</Card.Header>
+      <Form className="m-3" onSubmit={(e) => handleAddEntry(e)}>
         <Form.Group className="mb-3" controlId="formBasicDate">
           <Form.Label>Date</Form.Label>
           <Form.Control
+            name="date"
             type="text"
             value={entry.date}
             onChange={(e) => setEntry({ ...entry, date: e.target.value })}
           />
         </Form.Group>
+
         <Form.Group className="mt-3 mb-3" controlId="formBasicTemperature">
           <Form.Label>Temperature</Form.Label>
           <Form.Control
+            name="temperature"
             type="number"
             value={entry.temperature}
             onChange={(e) =>
@@ -53,12 +59,17 @@ export default function EntryForm({ addEntry }) {
         <Form.Group className="mt-3 mb-3" controlId="formBasicHumidity">
           <Form.Label>Humidity</Form.Label>
           <Form.Control
+            name="humidity"
             type="number"
             value={entry.humidity}
             onChange={(e) => setEntry({ ...entry, humidity: e.target.value })}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={handleAddEntry}>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={(e) => handleAddEntry(e)}
+        >
           Add Entry
         </Button>
       </Form>
