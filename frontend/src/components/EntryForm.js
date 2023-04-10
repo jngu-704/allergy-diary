@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 export default function EntryForm({ addEntry }) {
   const [entry, setEntry] = useState({
     id: uuidv4(),
-    date: "",
+    date: new Date(),
     temperature: "",
     humidity: "",
     allergicReaction: false,
@@ -22,7 +22,7 @@ export default function EntryForm({ addEntry }) {
     addEntry(entry);
     setEntry({
       id: uuidv4(),
-      date: "",
+      date: new Date(),
       temperature: "",
       humidity: "",
       allergicReaction: false,
@@ -33,13 +33,15 @@ export default function EntryForm({ addEntry }) {
 
   return (
     <Card>
-      <Card.Header>Create New Entry</Card.Header>
+      <Card.Header>
+        <b>Create New Entry</b>
+      </Card.Header>
       <Form className="m-3" onSubmit={(e) => handleAddEntry(e)}>
         <Form.Group className="mb-3" controlId="formBasicDate">
           <Form.Label>Date</Form.Label>
           <Form.Control
             name="date"
-            type="text"
+            type="date"
             value={entry.date}
             onChange={(e) => setEntry({ ...entry, date: e.target.value })}
           />

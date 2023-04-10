@@ -22,6 +22,11 @@ export default function Main() {
     setEntries([entry, ...entries]);
   };
 
+  const deleteEntry = (id) => {
+    const newEntries = entries.filter((entry) => entry.id !== id);
+    setEntries(newEntries);
+  };
+
   const handleEntryChange = (newEntries) => {
     setEntries(newEntries);
   };
@@ -31,6 +36,7 @@ export default function Main() {
       <EntryPage
         entries={entries}
         addEntry={addEntry}
+        deleteEntry={deleteEntry}
         handleEntryChange={handleEntryChange}
       />
     </Container>
