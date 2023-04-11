@@ -1,6 +1,5 @@
 import React from "react";
 
-import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -8,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import CloseButton from "react-bootstrap/CloseButton";
 import Stack from "react-bootstrap/Stack";
 import ProductForm from "./ProductForm";
+import Products from "./Products";
 
 export default function Entries({
   entries,
@@ -50,21 +50,7 @@ export default function Entries({
             </tr>
           </thead>
           <tbody>
-            {entry.products.map((product) => (
-              <tr key={product.id}>
-                <th>{product.time}</th>
-                <th>{product.name}</th>
-                <th>{product.ingredients}</th>
-                <th>
-                  <Button
-                    variant="danger"
-                    onClick={() => deleteProduct(entry.id, product.id)}
-                  >
-                    Remove
-                  </Button>
-                </th>
-              </tr>
-            ))}
+            <Products entry={entry} deleteProduct={deleteProduct} />
             <ProductForm
               entry={entry}
               entries={entries}

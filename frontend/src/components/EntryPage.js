@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
+import Form from "react-bootstrap/Form";
 import EntryForm from "./EntryForm";
 import Entries from "./Entries";
 
@@ -9,6 +10,9 @@ export default function EntryPage({
   deleteEntry,
   handleEntryChange,
 }) {
+  const [allergicReactionFilterToggle, setAllergicReactionFilterToggle] =
+    useState(true);
+
   const deleteProduct = (entryid, productid) => {
     const newEntries = [...entries];
     const entryIndex = newEntries.findIndex((entry) => entry.id === entryid);
@@ -27,18 +31,54 @@ export default function EntryPage({
     handleEntryChange(newEntries);
   };
 
+  const EntriesWithAllergicReaction = () => {
+    const filteredEntries = entries.filter(
+      (entry) => entry.allergicReaction === true
+    );
+
+    return (
+      <Entries
+        entries={filteredEntries}
+        deleteEntry={deleteEntry}
+        handleEntryChange={handleEntryChange}
+        deleteProduct={deleteProduct}
+        toggleAllergicReaction={toggleAllergicReaction}
+      />
+    );
+  };
+
+  const AllEntries = () => {
+    return (
+      <Entries
+        entries={entries}
+        deleteEntry={deleteEntry}
+        handleEntryChange={handleEntryChange}
+        deleteProduct={deleteProduct}
+        toggleAllergicReaction={toggleAllergicReaction}
+      />
+    );
+  };
+
+  const ListEntries = () => {
+    if (allergicReactionFilterToggle) return <EntriesWithAllergicReaction />;
+    else return <AllEntries />;
+  };
+
   return (
     <>
       <EntryForm addEntry={addEntry} deleteEntry={deleteEntry} />
       <br />
-      <Entries
-        entries={entries}
-        deleteProduct={deleteProduct}
-        toggleAllergicReaction={toggleAllergicReaction}
-        deleteEntry={deleteEntry}
-        addEntry={addEntry}
-        handleEntryChange={handleEntryChange}
+      <h2>Filter</h2>
+      <Form.Check
+        type="checkbox"
+        label="Allergic Reaction"
+        checked={allergicReactionFilterToggle}
+        onChange={() =>
+          setAllergicReactionFilterToggle(!allergicReactionFilterToggle)
+        }
       />
+      <br />
+      <ListEntries />
     </>
   );
 }
