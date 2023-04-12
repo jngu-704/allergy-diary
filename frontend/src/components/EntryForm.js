@@ -9,10 +9,10 @@ export default function EntryForm({ addEntry }) {
   const [entry, setEntry] = useState({
     id: uuidv4(),
     date: new Date(),
-    temperature: "",
-    humidity: "",
+    temperature: null,
+    humidity: null,
     allergicReaction: false,
-    symptoms: "",
+    symptoms: [],
     products: [],
   });
 
@@ -22,10 +22,10 @@ export default function EntryForm({ addEntry }) {
     setEntry({
       id: uuidv4(),
       date: new Date(),
-      temperature: "",
-      humidity: "",
+      temperature: null,
+      humidity: null,
       allergicReaction: false,
-      symptoms: "",
+      symptoms: [],
       products: [],
     });
   };

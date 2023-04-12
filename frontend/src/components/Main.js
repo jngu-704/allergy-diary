@@ -50,21 +50,21 @@ export default function Main() {
 //     temperature: 30,
 //     humidity: 40,
 //     allergicReaction: false,
-//     symptoms: "",
+//     symptoms: [],
 //     products: [
 //       {
 //         id: uuidv4(),
 //         time: "6:30PM",
 //         name: "Burger",
 //         ingredients:
-//           "Bun, Beef Patty, American Cheese, Ketchup, Pickle Slices, Onions, Mustard",
+//           ["Bun", "Beef Patty", "American Cheese", "Ketchup", "Pickle Slices", "Onions", "Mustard"],
 //       },
 //       {
 //         id: uuidv4(),
 //         time: "12:30PM",
 //         name: "Coca-cola",
 //         ingredients:
-//           "Carbonated Water, Sugar, Colour (Caramel 150d), Food Acid (338), Flavour, Caffeine",
+//           ["Carbonated Water", "Sugar", "Colour (Caramel 150d)", "Food Acid (338)", "Flavour", "Caffeine"]
 //       },
 //     ],
 //   },

@@ -68,7 +68,7 @@ export default function EntryPage({
     <>
       <EntryForm addEntry={addEntry} deleteEntry={deleteEntry} />
       <br />
-      <h2>Filter</h2>
+      <h4>Filters</h4>
       <Form.Check
         type="checkbox"
         label="Allergic Reaction"
